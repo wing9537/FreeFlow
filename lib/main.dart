@@ -2,6 +2,8 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'myHomePage.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -30,43 +32,17 @@ class MyAppState extends ChangeNotifier {
   void getNext() {
     current = WordPair.random();
     notifyListeners();
+
+  }
+  var favorites = <WordPair>[];
+
+  void toggleFavorite() {
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } else {
+      favorites.add(current);
+    }
+    notifyListeners();
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var pair = appState.current;
-
-    return Scaffold(
-      body: Column(
-        children: [
-          Text('A random idea111:'),
-          Text('A random idea111:'),
-          BigCard(pair:pair),
-
-          ElevatedButton(
-            onPressed: () {
-              appState.getNext();  // ← This instead of print().
-            },
-            child: Text('Next'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-class BigCard extends StatelessWidget {
-  const BigCard({
-    super.key,
-    required this.pair,
-  });
-
-  final WordPair pair;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(pair.asLowerCase);
-  }
-}
