@@ -1,22 +1,18 @@
-// ...
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:free_flow/photoCard.dart';
+import 'package:free_flow/widgets/photo_card.dart';
 import 'package:provider/provider.dart';
 
-import 'bigCard.dart';
-import 'favoritesPage.dart';
-import 'main.dart';
+import '../../main.dart';
+import 'favorites_page.dart';
 
-class MyHomePage extends StatefulWidget {
+class RandomWords extends StatefulWidget {
+  const RandomWords({super.key});
+
   @override
-  State<StatefulWidget> createState() {
-    return _MyHomePageState();
-  }
+  State<StatefulWidget> createState() => _RandomWordsState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _RandomWordsState extends State<RandomWords> {
   var selectedIndex = 0;
 
   @override
@@ -24,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorPage();
+        page = const GeneratorPage();
         break;
       case 1:
         page = FavoritesPage();
@@ -39,8 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             SafeArea(
               child: NavigationRail(
-                extended: constraints.maxWidth >= 600,  // ← Here.
-                destinations: [
+                extended: constraints.maxWidth >= 600,
+                destinations: const [
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
                     label: Text('Home'),
@@ -71,11 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
 class GeneratorPage extends StatelessWidget {
+  const GeneratorPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    var appState = context.watch<AppState>();
     var pair = appState.current;
 
     IconData icon;
@@ -90,7 +87,7 @@ class GeneratorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           PhotoCard(),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -99,14 +96,14 @@ class GeneratorPage extends StatelessWidget {
                   appState.toggleFavorite();
                 },
                 icon: Icon(icon),
-                label: Text('Like'),
+                label: const Text('Like'),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () {
                   appState.getNext();
                 },
-                child: Text('Next'),
+                child: const Text('Next'),
               ),
             ],
           ),
@@ -115,5 +112,3 @@ class GeneratorPage extends StatelessWidget {
     );
   }
 }
-
-// ...

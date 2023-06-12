@@ -1,40 +1,47 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:free_flow/views/diary/create_diary.dart';
+import 'package:free_flow/views/home/home.dart';
+import 'package:free_flow/views/profile/profile.dart';
 import 'package:provider/provider.dart';
 
-import 'myHomePage.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppState()),
+      ],
       child: MaterialApp(
-        title: 'Namer App',
+        title: 'Free Flow',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         ),
-        home: MyHomePage(),
+        initialRoute: "/home",
+        routes: <String, WidgetBuilder>{
+          "/home": (_) => const Home(),
+          "/diary/create": (_) => const CreateDiary(),
+          "/profile": (_) => const Profile(),
+        },
       ),
     );
   }
 }
 
-class MyAppState extends ChangeNotifier {
+class AppState extends ChangeNotifier {
   var current = WordPair.random();
+  var favorites = <WordPair>[];
+
   void getNext() {
     current = WordPair.random();
     notifyListeners();
-
   }
-  var favorites = <WordPair>[];
 
   void toggleFavorite() {
     if (favorites.contains(current)) {
@@ -45,4 +52,3 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 }
-
