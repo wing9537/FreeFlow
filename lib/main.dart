@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
 import 'package:free_flow/views/home/home.dart';
 import 'package:free_flow/views/profile/profile.dart';
@@ -25,9 +26,9 @@ class App extends StatelessWidget {
         ),
         initialRoute: "/home",
         routes: <String, WidgetBuilder>{
-          "/home": (_) => const Home(),
-          "/diary/create": (_) => const CreateDiary(),
-          "/profile": (_) => const Profile(),
+          Nav.home: (_) => const Home(),
+          Nav.createDiary: (_) => const CreateDiary(),
+          Nav.profile: (_) => const Profile(),
         },
       ),
     );

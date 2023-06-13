@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_flow/widgets/bottom_nav_bar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -10,6 +11,10 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return const Text("Profile Page");
+    return Scaffold(
+      appBar: AppBar(title: const Text("Profile")),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 2),
+      body: const Text("Profile Page"),
+    );
   }
 }

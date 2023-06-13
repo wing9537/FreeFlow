@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_flow/widgets/bottom_nav_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,6 +11,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Text("Home Page");
+    return Scaffold(
+      appBar: AppBar(title: const Text("Profile")),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 0),
+      body: const Text("Home Page"),
+    );
   }
 }

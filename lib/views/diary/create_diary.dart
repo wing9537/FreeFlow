@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_flow/widgets/bottom_nav_bar.dart';
 
 class CreateDiary extends StatefulWidget {
   const CreateDiary({super.key});
@@ -10,6 +11,10 @@ class CreateDiary extends StatefulWidget {
 class _CreateDiaryState extends State<CreateDiary> {
   @override
   Widget build(BuildContext context) {
-    return const Text("Create Diary Page");
+    return Scaffold(
+      appBar: AppBar(title: const Text("Profile")),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 1),
+      body: const Text("Create Diary Page"),
+    );
   }
 }
