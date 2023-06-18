@@ -8,28 +8,25 @@ class BottomNavBar extends StatelessWidget {
 
   _onPageChange(index, context) {
     if (currentIndex != index) {
-      Navigator.pushNamedAndRemoveUntil(context, Nav.get(index), (_) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Nav.path[index], (_) => false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-      ),
-      child: BottomNavigationBar(
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: (index) => _onPageChange(index, context),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined)),
-          BottomNavigationBarItem(icon: Icon(Icons.add_box_outlined)),
-          BottomNavigationBarItem(icon: Icon(Icons.person_rounded)),
-        ],
-      ),
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) => _onPageChange(index, context),
+      items: const [
+        BottomNavBarItem(icon: Icon(Icons.calendar_today_outlined)),
+        BottomNavBarItem(icon: Icon(Icons.add_photo_alternate_outlined)),
+        BottomNavBarItem(icon: Icon(Icons.person_rounded)),
+      ],
     );
   }
+}
+
+class BottomNavBarItem extends BottomNavigationBarItem {
+  const BottomNavBarItem({required super.icon, super.label = ""});
 }

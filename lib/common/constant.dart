@@ -1,16 +1,10 @@
 class Nav {
-  static const String home = "/home";
+  static const String calendar = "/calendar";
   static const String createDiary = "/diary/create";
   static const String profile = "/profile";
+  static const path = [calendar, createDiary, profile];
+}
 
-  static get(int index) {
-    switch (index) {
-      case 0:
-        return home;
-      case 1:
-        return createDiary;
-      case 2:
-        return profile;
-    }
-  }
+class Tbl {
+  static const String diary = "diary";
 }
