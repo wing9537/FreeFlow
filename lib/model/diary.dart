@@ -1,7 +1,7 @@
-import 'package:uuid/uuid.dart';
+import 'package:free_flow/common/tool.dart';
 
 class Diary {
-  final Uuid id;
+  final String id;
   final String title;
   final String content;
 
@@ -12,8 +12,8 @@ class Diary {
 
   factory Diary.fromJson(Map<String, dynamic> data) {
     Diary diary = Diary(data["id"], data["title"], data["content"]);
-    diary.createDate = data["createDate"];
-    diary.modifyDate = data["modifyDate"];
+    diary.createDate = Tool.stringToDate(data["createDate"]);
+    diary.modifyDate = Tool.stringToDate(data["modifyDate"]);
     return diary;
   }
 
@@ -21,7 +21,7 @@ class Diary {
         "id": id,
         "title": title,
         "content": content,
-        "createDate": createDate,
-        "modifyDate": modifyDate,
+        "createDate": Tool.dateToString(createDate),
+        "modifyDate": Tool.dateToString(modifyDate),
       };
 }

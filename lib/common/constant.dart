@@ -8,3 +8,7 @@ class Nav {
 class Tbl {
   static const String diary = "diary";
 }
+
+class Format {
+  static const String dateTime = "yyyy-MM-dd HH:mm:ss";
+}

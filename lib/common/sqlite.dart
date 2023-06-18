@@ -8,8 +8,7 @@ class Sqlite {
   late Database _database;
 
   Future<Database> get database async {
-    if (_database == null) _database = await createDatabase();
-    return _database;
+    return _database.isOpen ? _database : await createDatabase();
   }
 
   Future<Database> createDatabase() async {
@@ -17,7 +16,7 @@ class Sqlite {
     // Importing 'package:flutter/widgets.dart' is required.
     WidgetsFlutterBinding.ensureInitialized();
     // Open the database and store the reference.
-    return openDatabase(
+    _database = await openDatabase(
       // Set the path to the database.
       join(await getDatabasesPath(), "free_flow.db"),
       // When the database is first created, create a table to store dogs.
@@ -31,5 +30,6 @@ class Sqlite {
       // path to perform database upgrades and downgrades.
       version: 1,
     );
+    return _database;
   }
 }

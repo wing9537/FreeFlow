@@ -9,18 +9,18 @@ class DiaryDao {
     return result.map((item) => Diary.fromJson(item)).toList();
   }
 
-  Future<int> create(Diary diary) async {
+  Future<int> create(Diary model) async {
     final db = await Sqlite.provider.database;
-    return db.insert(Tbl.diary, diary.toJson());
+    return db.insert(Tbl.diary, model.toJson());
   }
 
-  Future<int> update(Diary diary) async {
+  Future<int> update(Diary model) async {
     final db = await Sqlite.provider.database;
-    return db.update(Tbl.diary, diary.toJson(),
-        where: "id = ?", whereArgs: [diary.id]);
+    return db.update(Tbl.diary, model.toJson(),
+        where: "id = ?", whereArgs: [model.id]);
   }
 
-  Future<int> delete(int id) async {
+  Future<int> delete(String id) async {
     final db = await Sqlite.provider.database;
     return await db.delete(Tbl.diary, where: 'id = ?', whereArgs: [id]);
   }
