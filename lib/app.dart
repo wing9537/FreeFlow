@@ -3,6 +3,7 @@ import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/state/new_diary.dart';
 import 'package:free_flow/views/calendar/calendar.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
+import 'package:free_flow/views/diary/take_photo.dart';
 import 'package:free_flow/views/profile/profile.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class App extends StatelessWidget {
           Nav.calendar: (_) => const Calendar(),
           Nav.createDiary: (_) => const CreateDiary(),
           Nav.profile: (_) => const Profile(),
+          Nav.takePhoto: (_) => TakePhoto(),
         },
       ),
     );

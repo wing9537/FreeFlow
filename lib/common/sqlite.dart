@@ -8,7 +8,11 @@ class Sqlite {
   late Database _database;
 
   Future<Database> get database async {
-    return _database.isOpen ? _database : await createDatabase();
+    try {
+      return _database.isOpen ? _database : await createDatabase();
+    } catch (e) {
+      return await createDatabase();
+    }
   }
 
   Future<Database> createDatabase() async {

@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 class NewDiaryState extends ChangeNotifier {
   String title = "";
   String content = "";
+  List<Uint8List> photos = [];
 
   final DiaryService _diaryService = DiaryService();
 
@@ -17,8 +18,14 @@ class NewDiaryState extends ChangeNotifier {
         .then((value) => clear());
   }
 
+  void addPhoto(Uint8List photo) {
+    photos.add(photo);
+    notifyListeners();
+  }
+
   void clear() {
     title = "";
     content = "";
+    photos.clear();
   }
 }

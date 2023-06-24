@@ -1,6 +1,7 @@
 class Nav {
   static const String calendar = "/calendar";
   static const String createDiary = "/diary/create";
+  static const String takePhoto = "/diary/takePhoto";
   static const String profile = "/profile";
   static const path = [calendar, createDiary, profile];
 }

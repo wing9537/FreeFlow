@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:free_flow/common/tool.dart';
 import 'package:free_flow/state/new_diary.dart';
+import 'package:free_flow/views/diary/photo_list.dart';
 import 'package:free_flow/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -41,28 +42,33 @@ class _CreateDiaryState extends State<CreateDiary> {
           child: Form(
             key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(children: [
-              TextFormField(
-                maxLength: 50,
-                initialValue: form.title,
-                onChanged: (value) => form.title = value,
-                decoration: const InputDecoration(hintText: "Title"),
-                validator: (value) => value == null || value.isEmpty
-                    ? "Title should not be blank."
-                    : null,
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                minLines: 5,
-                maxLines: 20,
-                initialValue: form.content,
-                onChanged: (value) => form.content = value,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "Content",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                  maxLength: 50,
+                  initialValue: form.title,
+                  onChanged: (value) => form.title = value,
+                  decoration: const InputDecoration(hintText: "Title"),
+                  validator: (value) => value == null || value.isEmpty
+                      ? "Title should not be blank."
+                      : null,
                 ),
-              ),
-            ]),
+                const SizedBox(height: 10),
+                TextFormField(
+                  minLines: 5,
+                  maxLines: 20,
+                  initialValue: form.content,
+                  onChanged: (value) => form.content = value,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Content",
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const PhotoList(),
+              ],
+            ),
           ),
         ),
       ),
