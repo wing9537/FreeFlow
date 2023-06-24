@@ -23,11 +23,17 @@ class Sqlite {
     _database = await openDatabase(
       // Set the path to the database.
       join(await getDatabasesPath(), "free_flow.db"),
-      // When the database is first created, create a table to store dogs.
+      // When the database is first created
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
-        return db.execute(
-          'CREATE TABLE diary(id TEXT PRIMARY KEY, title TEXT, content TEXT, createDate TEXT, modifyDate TEXT)',
+        db.execute(
+          "CREATE TABLE diary(id TEXT PRIMARY KEY, title TEXT, content TEXT, createDate TEXT, modifyDate TEXT)",
+        );
+        db.execute(
+          "CREATE TABLE photo(id TEXT PRIMARY KEY, refId TEXT, content BLOB, createDate TEXT, modifyDate TEXT)",
+        );
+        db.execute(
+          "CREATE INDEX idx_photo_refId ON photo(refId)",
         );
       },
       // Set the version. This executes the onCreate function and provides a

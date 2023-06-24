@@ -1,0 +1,2 @@
+1. clean cache file photo
+2. camera function: landscape? front camera? crop photo?

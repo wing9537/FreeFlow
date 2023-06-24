@@ -8,6 +8,7 @@ class Nav {
 
 class Tbl {
   static const String diary = "diary";
+  static const String photo = "photo";
 }
 
 class Format {

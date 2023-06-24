@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:free_flow/model/diary.dart';
+import 'package:free_flow/model/photo.dart';
 import 'package:free_flow/service/diary.dart';
+import 'package:free_flow/service/photo.dart';
 import 'package:uuid/uuid.dart';
 
 class NewDiaryState extends ChangeNotifier {
@@ -9,13 +11,17 @@ class NewDiaryState extends ChangeNotifier {
   List<Uint8List> photos = [];
 
   final DiaryService _diaryService = DiaryService();
+  final PhotoService _photoService = PhotoService();
 
   NewDiaryState();
 
-  Future submit() {
-    return _diaryService
-        .create(Diary(const Uuid().v1(), title, content))
-        .then((value) => clear());
+  Future submit() async {
+    final String diaryId = const Uuid().v1();
+    await _diaryService.create(Diary(diaryId, title, content));
+    for (Uint8List photo in photos) {
+      await _photoService.create(Photo(const Uuid().v1(), diaryId, photo));
+    }
+    return clear();
   }
 
   void addPhoto(Uint8List photo) {

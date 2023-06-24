@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/common/tool.dart';
 import 'package:free_flow/state/new_diary.dart';
 import 'package:free_flow/views/diary/photo_list.dart';
@@ -15,6 +16,15 @@ class CreateDiary extends StatefulWidget {
 class _CreateDiaryState extends State<CreateDiary> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
+  void _submitForm(NewDiaryState form) {
+    if (_formKey.currentState!.validate()) {
+      form.submit().then((_) {
+        Tool.showToast(context, "Done!");
+        Navigator.popAndPushNamed(context, Nav.calendar);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final NewDiaryState form = context.read();
@@ -24,13 +34,7 @@ class _CreateDiaryState extends State<CreateDiary> {
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                form.submit().then((_) {
-                  Tool.showToast(context, "Done!");
-                });
-              }
-            },
+            onPressed: () => _submitForm(form),
           ),
         ],
       ),

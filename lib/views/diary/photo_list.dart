@@ -16,7 +16,7 @@ class PhotoList extends StatefulWidget {
 class _PhotoListState extends State<PhotoList> {
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState form = context.read();
+    final NewDiaryState form = context.watch();
     return Wrap(
       children: [
         Ink(
