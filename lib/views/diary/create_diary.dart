@@ -16,9 +16,9 @@ class CreateDiary extends StatefulWidget {
 class _CreateDiaryState extends State<CreateDiary> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  void _submitForm(NewDiaryState form) {
+  void _submitForm(NewDiaryState state) {
     if (_formKey.currentState!.validate()) {
-      form.submit().then((_) {
+      state.submit().then((_) {
         Tool.showToast(context, "Done!");
         Navigator.popAndPushNamed(context, Nav.calendar);
       });
@@ -27,14 +27,14 @@ class _CreateDiaryState extends State<CreateDiary> {
 
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState form = context.read();
+    final NewDiaryState state = context.watch();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Create Diary"),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
-            onPressed: () => _submitForm(form),
+            onPressed: () => _submitForm(state),
           ),
         ],
       ),
@@ -51,8 +51,8 @@ class _CreateDiaryState extends State<CreateDiary> {
               children: [
                 TextFormField(
                   maxLength: 50,
-                  initialValue: form.title,
-                  onChanged: (value) => form.title = value,
+                  initialValue: state.title,
+                  onChanged: (value) => state.title = value,
                   decoration: const InputDecoration(hintText: "Title"),
                   validator: (value) => value == null || value.isEmpty
                       ? "Title should not be blank."
@@ -62,8 +62,8 @@ class _CreateDiaryState extends State<CreateDiary> {
                 TextFormField(
                   minLines: 5,
                   maxLines: 20,
-                  initialValue: form.content,
-                  onChanged: (value) => form.content = value,
+                  initialValue: state.content,
+                  onChanged: (value) => state.content = value,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Content",

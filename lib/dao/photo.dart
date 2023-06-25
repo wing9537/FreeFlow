@@ -3,10 +3,10 @@ import 'package:free_flow/common/sqlite.dart';
 import 'package:free_flow/model/photo.dart';
 
 class PhotoDao {
-  Future<List<Photo>> findById(String refId) async {
+  Future<List<Photo>> findById(String refId, {int? limit}) async {
     final db = await Sqlite.provider.database;
-    List<Map<String, dynamic>> result =
-        await db.query(Tbl.photo, where: "refId = ?", whereArgs: [refId]);
+    List<Map<String, dynamic>> result = await db.query(Tbl.photo,
+        where: "refId = ?", whereArgs: [refId], limit: limit);
     return result.map((item) => Photo.fromJson(item)).toList();
   }
 

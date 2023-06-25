@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_flow/common/constant.dart';
+import 'package:free_flow/state/diary_list.dart';
 import 'package:free_flow/state/new_diary.dart';
 import 'package:free_flow/views/calendar/calendar.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NewDiaryState()),
+        ChangeNotifierProvider(create: (_) => CalendarState()),
       ],
       child: MaterialApp(
         title: "Free Flow",
@@ -24,7 +26,7 @@ class App extends StatelessWidget {
           Nav.calendar: (_) => const Calendar(),
           Nav.createDiary: (_) => const CreateDiary(),
           Nav.profile: (_) => const Profile(),
-          Nav.takePhoto: (_) => TakePhoto(),
+          Nav.takePhoto: (_) => const TakePhoto(),
         },
       ),
     );

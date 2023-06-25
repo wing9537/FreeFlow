@@ -6,9 +6,7 @@ import 'package:free_flow/state/new_diary.dart';
 import 'package:provider/provider.dart';
 
 class TakePhoto extends StatefulWidget {
-  TakePhoto({super.key});
-
-  final CameraDescription camera = Camera.provider.camera;
+  const TakePhoto({super.key});
 
   @override
   State<StatefulWidget> createState() => _TakePhotoState();
@@ -17,6 +15,7 @@ class TakePhoto extends StatefulWidget {
 class _TakePhotoState extends State<TakePhoto> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  final CameraDescription _camera = Camera.provider.camera;
 
   void _takePhoto() async {
     try {
@@ -39,10 +38,7 @@ class _TakePhotoState extends State<TakePhoto> {
   void initState() {
     super.initState();
     // to display the current output from the Camera
-    _controller = CameraController(
-      widget.camera, // get a specific camera
-      ResolutionPreset.medium, // define the resolution to use
-    );
+    _controller = CameraController(_camera, ResolutionPreset.medium);
     // initialize the controller. This returns a Future.
     _initializeControllerFuture = _controller.initialize();
   }
@@ -59,7 +55,7 @@ class _TakePhotoState extends State<TakePhoto> {
       // You must wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner until the
       // controller has finished initializing.
-      body: FutureBuilder<void>(
+      body: FutureBuilder(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {

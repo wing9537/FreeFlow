@@ -4,7 +4,9 @@ import 'package:free_flow/model/photo.dart';
 class PhotoService {
   static final _photoDao = PhotoDao();
 
-  Future findById(String refId) => _photoDao.findById(refId);
+  Future findById(String refId, {int? limit}) {
+    return _photoDao.findById(refId, limit: limit);
+  }
 
   Future create(Photo model) => _photoDao.create(model);
 
