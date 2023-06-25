@@ -3,9 +3,10 @@ import 'package:free_flow/common/sqlite.dart';
 import 'package:free_flow/model/diary.dart';
 
 class DiaryDao {
-  Future<List<Diary>> find() async {
+  Future<List<Diary>> find(String startDate, String endDate) async {
     final db = await Sqlite.provider.database;
-    List<Map<String, dynamic>> result = await db.query(Tbl.diary);
+    List<Map<String, dynamic>> result = await db.query(Tbl.diary,
+        where: "recordDate BETWEEN ? AND ?", whereArgs: [startDate, endDate]);
     return result.map((item) => Diary.fromJson(item)).toList();
   }
 

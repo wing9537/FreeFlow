@@ -9,11 +9,11 @@ class Tool {
     );
   }
 
-  static String dateToString(DateTime dateTime) {
-    return DateFormat(Format.dateTime).format(dateTime);
+  static String dateToString(DateTime dateTime, {String? format}) {
+    return DateFormat(format ?? Format.dateTime).format(dateTime);
   }
 
-  static DateTime stringToDate(String dateString) {
-    return DateFormat(Format.dateTime).parse(dateString);
+  static DateTime stringToDate(String dateString, {String? format}) {
+    return DateFormat(format ?? Format.dateTime).parse(dateString);
   }
 }

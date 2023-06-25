@@ -38,6 +38,7 @@ dependencies:
   uuid: ^3.0.7
   intl: ^0.18.1
   camera: ^0.10.5+2
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:

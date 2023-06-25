@@ -16,18 +16,18 @@ class Sqlite {
   }
 
   Future<Database> createDatabase() async {
-    // Avoid errors caused by flutter upgrade.
-    // Importing 'package:flutter/widgets.dart' is required.
+    // avoid errors caused by flutter upgrade
+    // importing 'package:flutter/widgets.dart' is required
     WidgetsFlutterBinding.ensureInitialized();
-    // Open the database and store the reference.
+    // open the database and store the reference
     _database = await openDatabase(
-      // Set the path to the database.
+      // set the path to the database
       join(await getDatabasesPath(), "free_flow.db"),
-      // When the database is first created
+      // when the database is first created
       onCreate: (db, version) {
-        // Run the CREATE TABLE statement on the database.
+        // run the CREATE TABLE statement on the database
         db.execute(
-          "CREATE TABLE diary(id TEXT PRIMARY KEY, title TEXT, content TEXT, createDate TEXT, modifyDate TEXT)",
+          "CREATE TABLE diary(id TEXT PRIMARY KEY, title TEXT, content TEXT, recordDate TEXT, createDate TEXT, modifyDate TEXT)",
         );
         db.execute(
           "CREATE TABLE photo(id TEXT PRIMARY KEY, refId TEXT, content BLOB, createDate TEXT, modifyDate TEXT)",

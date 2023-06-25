@@ -27,10 +27,10 @@ class _CreateDiaryState extends State<CreateDiary> {
 
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState state = context.watch();
+    final NewDiaryState state = context.read();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Create Diary"),
+        title: const Text("My Diary"),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),

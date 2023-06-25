@@ -4,7 +4,9 @@ import 'package:free_flow/model/diary.dart';
 class DiaryService {
   static final _diaryDao = DiaryDao();
 
-  Future find() => _diaryDao.find();
+  Future find(String startDate, String endDate) {
+    return _diaryDao.find(startDate, endDate);
+  }
 
   Future create(Diary model) => _diaryDao.create(model);
 

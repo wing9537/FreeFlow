@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 class NewDiaryState extends ChangeNotifier {
   String title = "";
   String content = "";
+  DateTime recordDate = DateTime.now();
   List<Uint8List> photos = [];
 
   final DiaryService _diaryService = DiaryService();
@@ -17,7 +18,9 @@ class NewDiaryState extends ChangeNotifier {
 
   Future submit() async {
     final String diaryId = const Uuid().v1();
-    await _diaryService.create(Diary(diaryId, title, content));
+    await _diaryService.create(
+      Diary.build(diaryId, title, content, recordDate),
+    );
     for (Uint8List photo in photos) {
       await _photoService.create(Photo(const Uuid().v1(), diaryId, photo));
     }
@@ -32,6 +35,7 @@ class NewDiaryState extends ChangeNotifier {
   void clear() {
     title = "";
     content = "";
+    recordDate = DateTime.now();
     photos.clear();
   }
 }
