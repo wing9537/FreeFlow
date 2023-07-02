@@ -21,7 +21,9 @@ class BottomNavBar extends StatelessWidget {
       items: const [
         BottomNavBarItem(icon: Icon(Icons.calendar_today_outlined)),
         BottomNavBarItem(icon: Icon(Icons.add_photo_alternate_outlined)),
+        BottomNavBarItem(icon: Icon(Icons.photo_album)),
         BottomNavBarItem(icon: Icon(Icons.person_rounded)),
+
       ],
     );
   }

@@ -3,7 +3,8 @@ class Nav {
   static const String createDiary = "/diary/create";
   static const String takePhoto = "/diary/takePhoto";
   static const String profile = "/profile";
-  static const path = [calendar, createDiary, profile];
+  static const String photoList = "/photo/list";
+  static const path = [calendar, createDiary, photoList, profile];
 }
 
 class Tbl {
