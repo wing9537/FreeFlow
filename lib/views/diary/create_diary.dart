@@ -30,7 +30,7 @@ class _CreateDiaryState extends State<CreateDiary> {
     final NewDiaryState state = context.read();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Diary"),
+        title: Text("My Diary (${state.recordDay})"),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),

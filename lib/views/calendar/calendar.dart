@@ -19,14 +19,13 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   final PhotoService _photoService = PhotoService();
 
-  final ValueNotifier<List<Diary>> _selectedEvents = ValueNotifier([]);
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
-  List<Diary> _getEventsForDay(DateTime? day) {
-    return context.read<CalendarState>().events[day] ?? [];
-  }
+  String get selectedDay => _selectedDay != null
+      ? Tool.dateToString(_selectedDay!, format: Format.date)
+      : "NA";
 
   bool _selectedDayPredicate(DateTime day) {
     return isSameDay(_selectedDay, day);
@@ -36,7 +35,6 @@ class _CalendarState extends State<Calendar> {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() => _focusedDay = focusedDay);
       setState(() => _selectedDay = selectedDay);
-      _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
 
@@ -49,11 +47,10 @@ class _CalendarState extends State<Calendar> {
   void _onPageChanged(DateTime focusedDay) async {
     _focusedDay = focusedDay;
     await context.read<CalendarState>().fetch(_focusedDay);
-    _selectedEvents.value = _getEventsForDay(_selectedDay);
   }
 
   void _newDiary() {
-    context.read<NewDiaryState>().recordDate = _selectedDay!;
+    context.read<NewDiaryState>().addDiary(_selectedDay!);
     Navigator.popAndPushNamed(context, Nav.createDiary);
   }
 
@@ -64,13 +61,10 @@ class _CalendarState extends State<Calendar> {
   }
 
   @override
-  void dispose() {
-    _selectedEvents.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    CalendarState state = context.watch();
+    List<Diary> diaries = state.getEventsByDate(_selectedDay);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Calendar")),
       bottomNavigationBar: const BottomNavBar(currentIndex: 0),
@@ -82,15 +76,13 @@ class _CalendarState extends State<Calendar> {
             lastDay: DateTime.now(),
             calendarFormat: _calendarFormat,
             selectedDayPredicate: _selectedDayPredicate,
-            eventLoader: _getEventsForDay,
+            eventLoader: state.getEventsByDate,
             onDaySelected: _onDaySelected,
             onFormatChanged: _onFormatChanged,
             onPageChanged: _onPageChanged,
           ),
           ListTile(
-            title: Text(
-              "Selected Date: ${_selectedDay != null ? Tool.dateToString(_selectedDay!, format: "yyyy-MM-dd") : "NA"}",
-            ),
+            title: Text("Selected Date: $selectedDay"),
             trailing: _selectedDay != null
                 ? TextButton.icon(
                     onPressed: _newDiary,
@@ -100,27 +92,24 @@ class _CalendarState extends State<Calendar> {
                 : null,
           ),
           Expanded(
-            child: ValueListenableBuilder(
-              valueListenable: _selectedEvents,
-              builder: (context, diary, child) => ListView.builder(
-                itemCount: diary.length,
-                itemBuilder: (context, i) => Card(
-                  child: ListTile(
-                    leading: FutureBuilder(
-                        future: _photoService.findById(diary[i].id, limit: 1),
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null &&
-                              snapshot.data!.isNotEmpty) {
-                            return Image.memory(snapshot.data[0].content,
-                                width: 60, fit: BoxFit.cover);
-                          } else {
-                            return const Icon(Icons.photo,
-                                size: 60, color: Colors.grey);
-                          }
-                        }),
-                    title: Text(diary[i].title),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                  ),
+            child: ListView.builder(
+              itemCount: diaries.length,
+              itemBuilder: (context, i) => Card(
+                child: ListTile(
+                  leading: FutureBuilder(
+                      future: _photoService.findById(diaries[i].id, limit: 1),
+                      builder: (context, snapshot) {
+                        if (snapshot.data != null &&
+                            snapshot.data!.isNotEmpty) {
+                          return Image.memory(snapshot.data[0].content,
+                              width: 60, fit: BoxFit.cover);
+                        } else {
+                          return const Icon(Icons.photo,
+                              size: 60, color: Colors.grey);
+                        }
+                      }),
+                  title: Text(diaries[i].title),
+                  trailing: const Icon(Icons.keyboard_arrow_right),
                 ),
               ),
             ),

@@ -16,6 +16,10 @@ class CalendarState extends ChangeNotifier {
 
   CalendarState();
 
+  List<Diary> getEventsByDate(DateTime? date) {
+    return events[date] ?? [];
+  }
+
   Future fetch(DateTime date) async {
     final DateTime startDate = DateTime(date.year, date.month, 1);
     final DateTime endDate = startDate.add(const Duration(days: 31));
@@ -29,5 +33,6 @@ class CalendarState extends ChangeNotifier {
         events[diary.recordDate]?.add(diary); // prevent duplicate records
       }
     }
+    notifyListeners();
   }
 }

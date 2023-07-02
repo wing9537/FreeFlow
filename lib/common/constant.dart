@@ -13,4 +13,5 @@ class Tbl {
 
 class Format {
   static const String dateTime = "yyyy-MM-dd HH:mm:ss";
+  static const String date = "dd/MM/yyyy";
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:free_flow/common/constant.dart';
+import 'package:free_flow/common/tool.dart';
 import 'package:free_flow/model/diary.dart';
 import 'package:free_flow/model/photo.dart';
 import 'package:free_flow/service/diary.dart';
@@ -13,6 +15,8 @@ class NewDiaryState extends ChangeNotifier {
 
   final DiaryService _diaryService = DiaryService();
   final PhotoService _photoService = PhotoService();
+
+  String get recordDay => Tool.dateToString(recordDate, format: Format.date);
 
   NewDiaryState();
 
@@ -30,6 +34,11 @@ class NewDiaryState extends ChangeNotifier {
   void addPhoto(Uint8List photo) {
     photos.add(photo);
     notifyListeners();
+  }
+
+  void addDiary(DateTime date) {
+    clear(); // clear form first
+    recordDate = date;
   }
 
   void clear() {
