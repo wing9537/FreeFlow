@@ -11,7 +11,7 @@ class PhotoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState form = context.watch();
+    final NewDiaryState state = context.watch();
     return Wrap(
       children: [
         Ink(
@@ -28,8 +28,22 @@ class PhotoList extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, Nav.takePhoto),
           ),
         ),
-        for (Uint8List photo in form.photos)
-          Image.memory(photo, width: size, height: size, fit: BoxFit.cover),
+        for (Uint8List photo in state.photos)
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Image.memory(photo, width: size, height: size, fit: BoxFit.cover),
+              Positioned(
+                right: -15,
+                bottom: -15,
+                child: IconButton(
+                  icon: const Icon(Icons.delete, size: 15),
+                  color: Colors.red,
+                  onPressed: () => state.removePhoto(photo),
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }

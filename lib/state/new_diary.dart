@@ -36,6 +36,11 @@ class NewDiaryState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removePhoto(Uint8List photo) {
+    photos.remove(photo);
+    notifyListeners();
+  }
+
   void addDiary(DateTime date) {
     clear(); // clear form first
     recordDate = date;

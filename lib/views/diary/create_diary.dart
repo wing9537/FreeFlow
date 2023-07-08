@@ -25,6 +25,11 @@ class _CreateDiaryState extends State<CreateDiary> {
     }
   }
 
+  void _resetForm(NewDiaryState state) {
+    setState(() => state.clear());
+    Navigator.popAndPushNamed(context, Nav.createDiary);
+  }
+
   @override
   Widget build(BuildContext context) {
     final NewDiaryState state = context.read();
@@ -32,6 +37,10 @@ class _CreateDiaryState extends State<CreateDiary> {
       appBar: AppBar(
         title: Text("My Diary (${state.recordDay})"),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () => _resetForm(state),
+          ),
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () => _submitForm(state),
