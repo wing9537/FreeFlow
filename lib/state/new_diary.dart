@@ -16,7 +16,12 @@ class NewDiaryState extends ChangeNotifier {
   final DiaryService _diaryService = DiaryService();
   final PhotoService _photoService = PhotoService();
 
-  String get recordDay => Tool.dateToString(recordDate, format: Format.date);
+  String get diaryDay => Tool.dateToString(recordDate, format: Format.date);
+
+  set diaryDay(date) {
+    recordDate = date;
+    notifyListeners();
+  }
 
   NewDiaryState();
 
@@ -41,7 +46,7 @@ class NewDiaryState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addDiary(DateTime date) {
+  void newDiary(DateTime date) {
     clear(); // clear form first
     recordDate = date;
   }

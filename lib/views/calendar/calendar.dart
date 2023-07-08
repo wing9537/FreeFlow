@@ -50,7 +50,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   void _newDiary() {
-    context.read<NewDiaryState>().addDiary(_selectedDay!);
+    context.read<NewDiaryState>().newDiary(_selectedDay!);
     Navigator.popAndPushNamed(context, Nav.createDiary);
   }
 

@@ -15,6 +15,7 @@ class CreateDiary extends StatefulWidget {
 
 class _CreateDiaryState extends State<CreateDiary> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final DateTime _today = DateTime.now();
 
   void _submitForm(NewDiaryState state) {
     if (_formKey.currentState!.validate()) {
@@ -30,12 +31,24 @@ class _CreateDiaryState extends State<CreateDiary> {
     Navigator.popAndPushNamed(context, Nav.createDiary);
   }
 
+  void _showDatePicker(NewDiaryState state) async {
+    DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: _today,
+      firstDate: DateTime(2023, 1, 1),
+      lastDate: _today,
+    );
+    if (selectedDate != null) {
+      state.diaryDay = selectedDate;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState state = context.read();
+    final NewDiaryState state = context.watch();
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Diary (${state.recordDay})"),
+        title: Text("My Diary (${state.diaryDay})"),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -62,7 +75,13 @@ class _CreateDiaryState extends State<CreateDiary> {
                   maxLength: 50,
                   initialValue: state.title,
                   onChanged: (value) => state.title = value,
-                  decoration: const InputDecoration(hintText: "Title"),
+                  decoration: InputDecoration(
+                    hintText: "Title",
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.calendar_month),
+                      onPressed: () => _showDatePicker(state),
+                    ),
+                  ),
                   validator: (value) => value == null || value.isEmpty
                       ? "Title should not be blank."
                       : null,
