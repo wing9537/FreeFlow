@@ -39,7 +39,8 @@ class _CreateDiaryState extends State<CreateDiary> {
       lastDate: _today,
     );
     if (selectedDate != null) {
-      state.diaryDay = selectedDate;
+      state.recordDate = selectedDate;
+      state.refresh();
     }
   }
 

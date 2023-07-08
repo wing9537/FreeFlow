@@ -16,6 +16,8 @@ class CalendarState extends ChangeNotifier {
 
   CalendarState();
 
+  void refresh() => notifyListeners();
+
   List<Diary> getEventsByDate(DateTime? date) {
     return events[date] ?? [];
   }
@@ -33,6 +35,6 @@ class CalendarState extends ChangeNotifier {
         events[diary.recordDate]?.add(diary); // prevent duplicate records
       }
     }
-    notifyListeners();
+    refresh();
   }
 }

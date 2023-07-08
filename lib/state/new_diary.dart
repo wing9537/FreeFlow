@@ -18,12 +18,9 @@ class NewDiaryState extends ChangeNotifier {
 
   String get diaryDay => Tool.dateToString(recordDate, format: Format.date);
 
-  set diaryDay(date) {
-    recordDate = date;
-    notifyListeners();
-  }
-
   NewDiaryState();
+
+  void refresh() => notifyListeners();
 
   Future submit() async {
     final String diaryId = const Uuid().v1();
@@ -38,12 +35,12 @@ class NewDiaryState extends ChangeNotifier {
 
   void addPhoto(Uint8List photo) {
     photos.add(photo);
-    notifyListeners();
+    refresh();
   }
 
   void removePhoto(Uint8List photo) {
     photos.remove(photo);
-    notifyListeners();
+    refresh();
   }
 
   void newDiary(DateTime date) {
