@@ -30,7 +30,6 @@ class PhotoList extends StatelessWidget {
         ),
         for (Uint8List photo in state.photos)
           Stack(
-            clipBehavior: Clip.none,
             children: [
               Image.memory(photo, width: size, height: size, fit: BoxFit.cover),
               Positioned(

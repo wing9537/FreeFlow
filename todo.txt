@@ -1,3 +1,4 @@
-1. clean cache file photo
-2. camera function: landscape? front camera? crop photo?
-3. allow delete photo on create/ edit diary
+[ ] 1. clean cache file photo
+[v] 2. camera function: landscape?(x) front camera? crop photo?(x)
+[v] 3. allow delete photo on create/ edit diary
+[ ] 4. photo too large handling

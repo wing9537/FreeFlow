@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/state/calendar.dart';
+import 'package:free_flow/state/gallery.dart';
 import 'package:free_flow/state/new_diary.dart';
-import 'package:free_flow/state/photo.dart';
 import 'package:free_flow/views/calendar/calendar.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
-import 'package:free_flow/views/diary/photo_list.dart';
 import 'package:free_flow/views/diary/take_photo.dart';
+import 'package:free_flow/views/gallery/gallery.dart';
+import 'package:free_flow/views/gallery/photo_viewer.dart';
 import 'package:free_flow/views/profile/profile.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => NewDiaryState()),
         ChangeNotifierProvider(create: (_) => CalendarState()),
-        ChangeNotifierProvider(create: (_) => PhotoState()),
+        ChangeNotifierProvider(create: (_) => GalleryState()),
       ],
       child: MaterialApp(
         title: "Free Flow",
@@ -34,7 +35,8 @@ class App extends StatelessWidget {
           Nav.createDiary: (_) => const CreateDiary(),
           Nav.profile: (_) => const Profile(),
           Nav.takePhoto: (_) => const TakePhoto(),
-          Nav.photoList: (_) => const PhotoList(),
+          Nav.gallery: (_) => const Gallery(),
+          Nav.viewPhoto: (_) => const PhotoViewer(),
         },
       ),
     );

@@ -22,7 +22,7 @@ class CalendarState extends ChangeNotifier {
     return events[date] ?? [];
   }
 
-  Future fetch(DateTime date) async {
+  Future findByDate(DateTime date) async {
     final DateTime startDate = DateTime(date.year, date.month, 1);
     final DateTime endDate = startDate.add(const Duration(days: 31));
     List<Diary> diaries = await _diaryService.find(

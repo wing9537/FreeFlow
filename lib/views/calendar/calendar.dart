@@ -46,7 +46,7 @@ class _CalendarState extends State<Calendar> {
 
   void _onPageChanged(DateTime focusedDay) async {
     _focusedDay = focusedDay;
-    await context.read<CalendarState>().fetch(_focusedDay);
+    await context.read<CalendarState>().findByDate(_focusedDay);
   }
 
   void _newDiary() {
@@ -57,7 +57,7 @@ class _CalendarState extends State<Calendar> {
   @override
   void initState() {
     super.initState();
-    context.read<CalendarState>().fetch(_focusedDay);
+    context.read<CalendarState>().findByDate(_focusedDay);
   }
 
   @override

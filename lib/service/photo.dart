@@ -4,8 +4,8 @@ import 'package:free_flow/model/photo.dart';
 class PhotoService {
   static final _photoDao = PhotoDao();
 
-  Future get50Photos() {
-    return _photoDao.get50Photos();
+  Future findByMonth(String month) {
+    return _photoDao.findByMonth(month);
   }
 
   Future findById(String refId, {int? limit}) {
@@ -17,4 +17,6 @@ class PhotoService {
   Future update(Photo model) => _photoDao.update(model);
 
   Future delete(String id) => _photoDao.delete(id);
+
+  Future getAvailableMonth() => _photoDao.getAvailableMonth();
 }
