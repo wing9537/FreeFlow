@@ -5,11 +5,10 @@ import 'package:free_flow/state/new_diary.dart';
 import 'package:free_flow/state/photo.dart';
 import 'package:free_flow/views/calendar/calendar.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
+import 'package:free_flow/views/diary/photo_list.dart';
 import 'package:free_flow/views/diary/take_photo.dart';
 import 'package:free_flow/views/profile/profile.dart';
 import 'package:provider/provider.dart';
-
-import 'views/photo/photo_list.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -24,7 +23,11 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         title: "Free Flow",
-        theme: ThemeData(useMaterial3: true),
+        theme: ThemeData(
+          useMaterial3: true,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
         initialRoute: Nav.calendar,
         routes: <String, WidgetBuilder>{
           Nav.calendar: (_) => const Calendar(),
