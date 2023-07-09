@@ -3,6 +3,7 @@ import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/state/calendar.dart';
 import 'package:free_flow/state/diary_form.dart';
 import 'package:free_flow/state/gallery.dart';
+import 'package:free_flow/state/search_form.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
 import 'package:free_flow/views/diary/take_photo.dart';
 import 'package:free_flow/views/gallery/gallery.dart';
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DiaryFormState()),
         ChangeNotifierProvider(create: (_) => CalendarState()),
         ChangeNotifierProvider(create: (_) => GalleryState()),
+        ChangeNotifierProvider(create: (_) => SearchFormState()),
       ],
       child: MaterialApp(
         title: "Free Flow",

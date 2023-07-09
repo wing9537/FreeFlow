@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/common/tool.dart';
 import 'package:free_flow/model/diary.dart';
-import 'package:free_flow/service/photo.dart';
 import 'package:free_flow/state/calendar.dart';
 import 'package:free_flow/state/diary_form.dart';
+import 'package:free_flow/views/search/diary_list.dart';
 import 'package:free_flow/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -17,8 +17,6 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  final PhotoService _photoService = PhotoService();
-
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -64,7 +62,6 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     CalendarState state = context.watch();
     List<Diary> diaries = state.getEventsByDate(_selectedDay);
-
     return Scaffold(
       appBar: AppBar(title: const Text("Calendar")),
       bottomNavigationBar: const BottomNavBar(currentIndex: 0),
@@ -91,29 +88,7 @@ class _CalendarState extends State<Calendar> {
                   )
                 : null,
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: diaries.length,
-              itemBuilder: (context, i) => Card(
-                child: ListTile(
-                  leading: FutureBuilder(
-                      future: _photoService.findById(diaries[i].id, limit: 1),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null &&
-                            snapshot.data!.isNotEmpty) {
-                          return Image.memory(snapshot.data[0].content,
-                              width: 60, fit: BoxFit.cover);
-                        } else {
-                          return const Icon(Icons.photo,
-                              size: 60, color: Colors.grey);
-                        }
-                      }),
-                  title: Text(diaries[i].title),
-                  trailing: const Icon(Icons.keyboard_arrow_right),
-                ),
-              ),
-            ),
-          ),
+          DiaryList(diaries),
         ],
       ),
     );
