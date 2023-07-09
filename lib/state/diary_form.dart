@@ -7,7 +7,7 @@ import 'package:free_flow/service/diary.dart';
 import 'package:free_flow/service/photo.dart';
 import 'package:uuid/uuid.dart';
 
-class NewDiaryState extends ChangeNotifier {
+class DiaryFormState extends ChangeNotifier {
   String title = "";
   String content = "";
   DateTime recordDate = DateTime.now();
@@ -18,7 +18,7 @@ class NewDiaryState extends ChangeNotifier {
 
   String get diaryDay => Tool.dateToString(recordDate, format: Format.date);
 
-  NewDiaryState();
+  DiaryFormState();
 
   void refresh() => notifyListeners();
 

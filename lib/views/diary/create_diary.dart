@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:free_flow/common/constant.dart';
 import 'package:free_flow/common/tool.dart';
-import 'package:free_flow/state/new_diary.dart';
+import 'package:free_flow/state/diary_form.dart';
 import 'package:free_flow/views/diary/photo_list.dart';
 import 'package:free_flow/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ class _CreateDiaryState extends State<CreateDiary> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final DateTime _today = DateTime.now();
 
-  void _submitForm(NewDiaryState state) {
+  void _submitForm(DiaryFormState state) {
     if (_formKey.currentState!.validate()) {
       state.submit().then((_) {
         Tool.showToast(context, "Done!");
@@ -26,12 +26,12 @@ class _CreateDiaryState extends State<CreateDiary> {
     }
   }
 
-  void _resetForm(NewDiaryState state) {
+  void _resetForm(DiaryFormState state) {
     setState(() => state.clear());
     Navigator.popAndPushNamed(context, Nav.createDiary);
   }
 
-  void _showDatePicker(NewDiaryState state) async {
+  void _showDatePicker(DiaryFormState state) async {
     DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: _today,
@@ -46,7 +46,7 @@ class _CreateDiaryState extends State<CreateDiary> {
 
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState state = context.watch();
+    final DiaryFormState state = context.watch();
     return Scaffold(
       appBar: AppBar(
         title: Text("My Diary (${state.diaryDay})"),

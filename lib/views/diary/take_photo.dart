@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:free_flow/common/camera.dart';
-import 'package:free_flow/state/new_diary.dart';
+import 'package:free_flow/state/diary_form.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +30,7 @@ class _TakePhotoState extends State<TakePhoto> {
       final XFile photo = await _controller.takePicture();
       final Uint8List byte = await photo.readAsBytes();
       if (mounted) {
-        context.read<NewDiaryState>().addPhoto(byte);
+        context.read<DiaryFormState>().addPhoto(byte);
         Navigator.pop(context);
       }
     } catch (e) {
@@ -39,10 +39,10 @@ class _TakePhotoState extends State<TakePhoto> {
   }
 
   void _openGallery() async {
-    final NewDiaryState state = context.read();
-    final List<XFile> photoList = await _picker.pickMultiImage();
-    if (photoList.isNotEmpty) {
-      for (XFile photo in photoList) {
+    final DiaryFormState state = context.read();
+    final List<XFile> photos = await _picker.pickMultiImage(imageQuality: 30);
+    if (photos.isNotEmpty) {
+      for (XFile photo in photos) {
         state.addPhoto(await photo.readAsBytes());
       }
       if (mounted) Navigator.pop(context);

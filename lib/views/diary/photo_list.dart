@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:free_flow/common/constant.dart';
-import 'package:free_flow/state/new_diary.dart';
+import 'package:free_flow/state/diary_form.dart';
 import 'package:provider/provider.dart';
 
 class PhotoList extends StatelessWidget {
@@ -11,7 +11,7 @@ class PhotoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NewDiaryState state = context.watch();
+    final DiaryFormState state = context.watch();
     return Wrap(
       children: [
         Ink(

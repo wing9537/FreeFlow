@@ -4,7 +4,7 @@ import 'package:free_flow/common/tool.dart';
 import 'package:free_flow/model/diary.dart';
 import 'package:free_flow/service/photo.dart';
 import 'package:free_flow/state/calendar.dart';
-import 'package:free_flow/state/new_diary.dart';
+import 'package:free_flow/state/diary_form.dart';
 import 'package:free_flow/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -50,7 +50,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   void _newDiary() {
-    context.read<NewDiaryState>().newDiary(_selectedDay!);
+    context.read<DiaryFormState>().newDiary(_selectedDay!);
     Navigator.popAndPushNamed(context, Nav.createDiary);
   }
 

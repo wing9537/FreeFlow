@@ -7,7 +7,6 @@ import 'package:free_flow/model/photo.dart';
 import 'package:free_flow/service/photo.dart';
 
 class GalleryState extends ChangeNotifier {
-  int offset = 0;
   List<DateTime> availableMonths = [];
   LinkedHashMap<String, List<Uint8List>> photoGroups = LinkedHashMap();
 

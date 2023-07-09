@@ -2,10 +2,11 @@ class Nav {
   static const String calendar = "/calendar";
   static const String createDiary = "/diary/create";
   static const String takePhoto = "/diary/takePhoto";
-  static const String profile = "/profile";
   static const String gallery = "/gallery";
-  static const String viewPhoto = "/gallery/viewPhoto";
-  static const path = [calendar, createDiary, gallery, profile];
+  static const String viewPhoto = "/gallery/view";
+  static const String search = "/search";
+  static const String setting = "/setting";
+  static const path = [calendar, createDiary, gallery, search, setting];
 }
 
 class Tbl {
