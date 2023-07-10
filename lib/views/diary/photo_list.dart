@@ -17,9 +17,9 @@ class PhotoList extends StatelessWidget {
         Ink(
           height: size,
           width: size,
-          decoration: const ShapeDecoration(
-            color: Colors.grey,
-            shape: ContinuousRectangleBorder(),
+          decoration: ShapeDecoration(
+            color: Colors.grey[400],
+            shape: const ContinuousRectangleBorder(),
           ),
           child: IconButton(
             iconSize: 72,
