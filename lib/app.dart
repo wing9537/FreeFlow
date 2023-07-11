@@ -5,6 +5,7 @@ import 'package:free_flow/state/diary_form.dart';
 import 'package:free_flow/state/gallery.dart';
 import 'package:free_flow/state/search_form.dart';
 import 'package:free_flow/views/diary/create_diary.dart';
+import 'package:free_flow/views/diary/diary_detail.dart';
 import 'package:free_flow/views/diary/take_photo.dart';
 import 'package:free_flow/views/gallery/gallery.dart';
 import 'package:free_flow/views/gallery/photo_viewer.dart';
@@ -37,9 +38,10 @@ class App extends StatelessWidget {
           Nav.calendar: (_) => const Calendar(),
           Nav.createDiary: (_) => const CreateDiary(),
           Nav.takePhoto: (_) => const TakePhoto(),
+          Nav.diaryDetail: (_) => const DiaryDetail(),
           Nav.gallery: (_) => const Gallery(),
           Nav.viewPhoto: (_) => const PhotoViewer(),
-          Nav.search: (_) => const Search(),
+          Nav.searchDiary: (_) => const Search(),
           Nav.setting: (_) => const Setting(),
         },
       ),

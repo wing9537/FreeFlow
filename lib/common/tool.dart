@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class Tool {
   static void showToast(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(text), backgroundColor: Colors.grey),
+      SnackBar(content: Text(text), backgroundColor: Colors.blueAccent),
     );
   }
 

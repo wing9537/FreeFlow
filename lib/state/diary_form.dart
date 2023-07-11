@@ -24,13 +24,13 @@ class DiaryFormState extends ChangeNotifier {
 
   Future submit() async {
     final String diaryId = const Uuid().v1();
-    await _diaryService.create(
-      Diary.build(diaryId, title, content, recordDate),
-    );
+    final Diary diary = Diary.build(diaryId, title, content, recordDate);
+    await _diaryService.create(diary);
     for (Uint8List photo in photos) {
       await _photoService.create(Photo(const Uuid().v1(), diaryId, photo));
     }
-    return clear();
+    clear();
+    return diary;
   }
 
   void addPhoto(Uint8List photo) {

@@ -67,6 +67,7 @@ class _GalleryState extends State<Gallery> {
                   child: Image.memory(photos[j], fit: BoxFit.cover),
                 ),
               ),
+              const SizedBox(height: 10),
             ],
           );
         },

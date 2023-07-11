@@ -33,6 +33,8 @@ class DiaryList extends StatelessWidget {
               title: Text(diaries[i].title),
               subtitle: const SizedBox(),
               trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, Nav.diaryDetail,
+                  arguments: diaries[i]),
             ),
           );
           final recordDate = Positioned(
