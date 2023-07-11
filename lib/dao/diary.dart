@@ -15,6 +15,7 @@ class DiaryDao {
     List<Map<String, dynamic>> result = await db.query(Tbl.diary,
         where: "title like ? OR content like ?",
         whereArgs: ["%$text%", "%$text%"],
+        orderBy: "recordDate desc",
         limit: limit);
     return result.map((item) => Diary.fromJson(item)).toList();
   }

@@ -46,24 +46,22 @@ class _GalleryState extends State<Gallery> {
           final String month = state.getDisplayMonth(i);
           final List<Uint8List> photos = state.getPhotoGroup(month);
           return ExpansionTile(
+            maintainState: true,
             initiallyExpanded: _selectedIndex == i,
             expandedAlignment: Alignment.topLeft,
-            backgroundColor: Theme.of(context).focusColor,
-            childrenPadding: const EdgeInsets.symmetric(horizontal: 15),
+            childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
             onExpansionChanged: (isOpen) => photos.isEmpty
                 ? state.findByMonth(state.availableMonths[i])
                 : _onExpansionChanged(isOpen, i),
-            title: Text(
-              month,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            title: Text(month, textAlign: TextAlign.center),
+            leading: const SizedBox(),
             children: [
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: photos.length,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4, mainAxisSpacing: 8, crossAxisSpacing: 8),
+                    crossAxisCount: 5, mainAxisSpacing: 5, crossAxisSpacing: 5),
                 itemBuilder: (context, j) => InkWell(
                   onTap: () => _onPhotoTapped(photos[j]),
                   child: Image.memory(photos[j], fit: BoxFit.cover),

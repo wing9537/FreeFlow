@@ -13,12 +13,10 @@ class SearchFormState extends ChangeNotifier {
 
   void refresh() => notifyListeners();
 
-  Future findDiary(String text) async {
+  Future findDiary() async {
     if (text.isNotEmpty) {
       diaries = await _diaryService.find(text, limit: 100);
-      hasRecord = diaries.isNotEmpty;
     }
-    this.text = text;
     hasRecord = text.isNotEmpty && diaries.isNotEmpty;
     refresh();
   }

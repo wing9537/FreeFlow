@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:free_flow/state/search_form.dart';
 import 'package:free_flow/views/search/diary_list.dart';
@@ -15,13 +13,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  Timer? _timer;
-
-  void onTextChanged(SearchFormState state, String text) {
-    if (_timer != null) _timer!.cancel();
-    _timer = Timer(const Duration(seconds: 1), () => state.findDiary(text));
-  }
-
   @override
   Widget build(BuildContext context) {
     final SearchFormState state = context.watch();
@@ -34,14 +25,17 @@ class _SearchState extends State<Search> {
           children: [
             TextFormField(
               initialValue: state.text,
-              onChanged: (value) => onTextChanged(state, value),
+              onChanged: (value) => state.text = value.trim(),
+              onEditingComplete: state.findDiary,
               decoration: const InputDecoration(
                 hintText: "Please input here",
                 prefixIcon: Icon(Icons.search),
                 helperText: "",
               ),
             ),
-            state.hasRecord ? DiaryList(state.diaries) : const NoContent(),
+            state.hasRecord
+                ? DiaryList(state.diaries, hasDate: true)
+                : const NoContent(),
           ],
         ),
       ),
